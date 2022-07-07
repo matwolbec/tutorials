@@ -2,7 +2,7 @@
 Initial requirements and infos for terraform usage
 
 ## First step  
-Install terraform: See https://www.terraform.io/downloads,choose your OS and follow the guide.
+Install terraform: See [https://www.terraform.io/downloads](https://www.terraform.io/downloads), choose your OS and follow the guide.
 
 
 ## Basic commands  

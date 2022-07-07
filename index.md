@@ -16,4 +16,4 @@ I'm a DevOps enthusiast, network technician, sysadmin and infosec specialist. I'
 
 I chose to use a static theme with markdown compatibility to keep on Github Pages for free.
 
-Need something like this? Take a look on (https://github.com/topics/jekyll-theme)
+Need something like this? Take a look on [https://github.com/topics/jekyll-theme](https://github.com/topics/jekyll-theme)
