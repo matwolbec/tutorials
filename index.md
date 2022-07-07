@@ -1,13 +1,14 @@
-## Welcome to Matwolbec Tutorials
+# Welcome to @matwolbec tutorials
 
 Here you will find some tutorials about Linux and DevOps.
 
-### About me
-I'm a Linux enthusiast, I've been working with Infrastructure and Network for several years. 
+## About
+
+I'm a DevOps enthusiast, network technician, sysadmin and infosec specialist. I've been working with Infrastructure and Network for several years and wanted to share some how-to-guides (even with myself when I need). 
 
 
-#### Built with Jekyll Themes
+### Built with Jekyll Themes
 
-I choose to use a static theme with markdown compatibility to keep on Github Pages for free.
+I chose to use a static theme with markdown compatibility to keep on Github Pages for free.
 
-If you like, feel free to read more about: https://github.com/topics/jekyll-theme
+Need something like this? Take a look on https://github.com/topics/jekyll-theme 
