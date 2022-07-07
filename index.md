@@ -6,6 +6,8 @@ Here you will find some tutorials about Linux and DevOps.
 
 I'm a DevOps enthusiast, network technician, sysadmin and infosec specialist. I've been working with Infrastructure and Network for several years and wanted to share some how-to-guides (even with myself when I need). 
 
+Check my [main page](https://matwolbec.github.io) for more info.
+
 # Tutorials
 - [Terraform Essentials](terraform/index.md)
 - [Terraform on Azure](terraform/azure.md)
