@@ -21,16 +21,24 @@ terraform import # Associate existing infrastructure with a Terraform resource
 
 ## Setting directories and initial file
 
-You must define your workdir. Usually the workdir will be the name of your Infra Project. In this case I will create a directory for this tutorial:
+You must define your workdir. Usually the workdir will be the name of your Infra Project. 
+
+- In this case I will create a directory for this tutorial:
 
 ```bash
 mkdir howto-terraform
 cd howto-terraform
 ```
 
-Now you can create another dir to define different environments, like ```staging``` and ```production```:
+- Now you can create another dir to define different environments, like ```staging``` and ```production```:
 ```bash
 mkdir staging production
 ```
 
+- Create a ```main.tf``` file. We will use the ```stating``` directory first
+```bash
+cd staging
+touch main.tf
+```
 
+- Open the ```main.tf``` file with your IDE
