@@ -1,4 +1,4 @@
-# [@matwolbec](https://matwolbec.github.io) - Terraform esssentials
+# [@matwolbec tutorials](https://matwolbec.github.io/tutorials/) - Terraform esssentials
 Requirements and infos for essential terraform usage  
 
 Terraform is an open-source infrastructure as code software tool that enables you to safely and predictably create, change, and improve infrastructure.
