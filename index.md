@@ -2,7 +2,7 @@
 
 Here you will find some tutorials about Linux and DevOps.
 
-# About
+## About
 
 I'm a DevOps enthusiast, network technician, sysadmin and infosec specialist. I've been working with Infrastructure and Network for several years and wanted to share some how-to-guides (even with myself when I need). 
 
