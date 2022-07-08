@@ -1,5 +1,5 @@
 # [@matwolbec tutorials](https://matwolbec.github.io/tutorials/)
-# Terraform on Azure Esssentials
+## Terraform on Azure Esssentials
 Requirements and infos for essential terraform on azure usage  
 
 ## About Terraform
@@ -27,27 +27,26 @@ terraform import # Associate existing infrastructure with a Terraform resource
 
 You must define your workdir. Usually the workdir will be the name of your Infra Project. 
 
-- In this case I will create a directory for this tutorial:
+In this case I will create a directory for this tutorial:
 ```bash
 mkdir howto-terraform
 cd howto-terraform
 ```
-
-- Now you can create another dir to define different environments, like ```staging``` and ```production```:
+  
+Now you can create another dir to define different environments, like ```staging``` and ```production```:
 ```bash
 mkdir staging production
 ```
-
-- Create a ```main.tf``` file. We will use the ```staging``` directory first
+  
+Create a ```main.tf``` file. We will use the ```staging``` directory first
 ```bash
 cd staging
 touch main.tf
 ```
 
-
 ## Logging into the Azure CLI
 
-Before we can start to use Terraform, we have to login on Azure CLI:
+- Before we can start to use Terraform, we have to login on Azure CLI:
 ```bash
 az login
 ```
@@ -64,7 +63,8 @@ az account list
 - Open the ```main.tf``` file with your IDE
 
 - Like said on the guide above, insert the content below in the ```main.tf``` file:
-```bash
+
+```t
 terraform {
   required_providers {
     azurerm = {
