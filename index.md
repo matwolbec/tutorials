@@ -9,8 +9,7 @@ I'm a DevOps enthusiast, network technician, sysadmin and infosec specialist. I'
 Check my [main page](https://matwolbec.github.io) for more info.
 
 # Tutorials
-- [Terraform Essentials](terraform/index.md)
-- [Terraform on Azure](terraform/azure.md)
+- [Terraform on Azure](terraform/terraform-azure.md)
 
 <br>
 

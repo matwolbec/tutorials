@@ -1,15 +1,18 @@
-# [@matwolbec tutorials](https://matwolbec.github.io/tutorials/) - Terraform esssentials
-Requirements and infos for essential terraform usage  
+# [@matwolbec tutorials](https://matwolbec.github.io/tutorials/) - Terraform on Azure Esssentials
+Requirements and infos for essential terraform on azure usage  
 
+## About Terraform
 Terraform is an open-source infrastructure as code software tool that enables you to safely and predictably create, change, and improve infrastructure.
 
 For further info, check [https://www.terraform.io/](https://www.terraform.io/)
 
-## First step  
-Install terraform: See [https://www.terraform.io/downloads](https://www.terraform.io/downloads), choose your OS and follow the guide.
+## Install requirements
+- Terraform: Choose your OS and follow the guide [https://www.terraform.io/downloads](https://www.terraform.io/downloads)
+- Azure CLI: Same as above [https://docs.microsoft.com/en-us/cli/azure/install-azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
+- Azure Account: Create and earn U$200,00 to try explore it [https://azure.microsoft.com/en-us/free/](https://azure.microsoft.com/en-us/free/)
 
 
-## Basic commands  
+## Basic terraform commands  
 ```bash
 terraform init #  Prepare your working directory for other commands
 terraform plan # Show changes required by the current configuration
@@ -24,7 +27,6 @@ terraform import # Associate existing infrastructure with a Terraform resource
 You must define your workdir. Usually the workdir will be the name of your Infra Project. 
 
 - In this case I will create a directory for this tutorial:
-
 ```bash
 mkdir howto-terraform
 cd howto-terraform
@@ -42,3 +44,17 @@ touch main.tf
 ```
 
 - Open the ```main.tf``` file with your IDE
+
+
+## Logging into the Azure CLI
+
+Before we can start to use Terraform, we have to login on Azure CLI:
+```bash
+az login
+```
+
+Get the subscription list (we don't need it right now, but you can have more subscriptions)
+```bash
+az account list
+```
+
