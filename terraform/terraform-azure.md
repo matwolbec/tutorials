@@ -1,5 +1,5 @@
 # [@matwolbec tutorials](https://matwolbec.github.io/tutorials/)
-## Terraform on Azure Esssentials
+# Terraform on Azure Esssentials
 Requirements and infos for essential terraform on azure usage  
 
 ## About Terraform
@@ -46,7 +46,7 @@ touch main.tf
 
 ## Logging into the Azure CLI
 
-- Before we can start to use Terraform, we have to login on Azure CLI:
+Before we can start to use Terraform, we have to login on Azure CLI:
 ```bash
 az login
 ```
@@ -58,7 +58,7 @@ az account list
 
 ## Initializing the Terraform file structure
 
-- To get providers documentations, use the registry.terraform.io. You will find a lot of available providers there. In our case: [https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli)
+To get providers documentations, use the registry.terraform.io. You will find a lot of available providers there. In our case: [https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli)
 
 - Open the ```main.tf``` file with your IDE
 
