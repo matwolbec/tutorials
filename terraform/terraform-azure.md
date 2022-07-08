@@ -1,4 +1,5 @@
-# [@matwolbec tutorials](https://matwolbec.github.io/tutorials/) - Terraform on Azure Esssentials
+# [@matwolbec tutorials](https://matwolbec.github.io/tutorials/)
+# Terraform on Azure Esssentials
 Requirements and infos for essential terraform on azure usage  
 
 ## About Terraform
@@ -37,13 +38,11 @@ cd howto-terraform
 mkdir staging production
 ```
 
-- Create a ```main.tf``` file. We will use the ```stating``` directory first
+- Create a ```main.tf``` file. We will use the ```staging``` directory first
 ```bash
 cd staging
 touch main.tf
 ```
-
-- Open the ```main.tf``` file with your IDE
 
 
 ## Logging into the Azure CLI
@@ -58,3 +57,25 @@ Get the subscription list (we don't need it right now, but you can have more sub
 az account list
 ```
 
+## Initializing the Terraform file structure
+
+- To get providers documentations, use the registry.terraform.io. You will find a lot of available providers there. In our case: [https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli)
+
+- Open the ```main.tf``` file with your IDE
+
+- Like said on the guide above, insert the content below in the ```main.tf``` file:
+```bash
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.0.0"
+    }
+  }
+}
+
+# Configure the Microsoft Azure Provider
+provider "azurerm" {
+  features {}
+}
+```
