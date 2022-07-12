@@ -109,7 +109,7 @@ A resource group could be all instances needed to run your application, like APP
 Generally, add resources that share the same lifecycle to the same resource group so you can easily deploy, update, and delete them as a group.
 
 In your ```main.tf``` file, add a code block:
-```bash
+```json
 # Create a resource group
 resource "azurerm_resource_group" "default" {
   name     = "staging-resources"
@@ -127,8 +127,43 @@ And now let's apply and it will be provisioned on Azure. You have to confirm the
 terraform apply
 ```
 
+## tfstate file
+After you run apply, the resource was generated. Now you should notice a new file on your workdir: ```terraform.tfstate```. Meanwhile, this file shouldn't be deleted once it's your resource control. When you edit your main.tf file and run ```plan``` or ```apply```, it will check this file, compare, and just then request the needed info to the provider API.
+
+## Destroying our first resource
 An important thing is to destroy your resources after you have done with your objectives, avoiding additional costs. Run the command and remember to type ```yes``` and confirm:
 ```bash
 terraform destroy
 ```
+
+## Adding resources
+Tagging your resource is a good advice, you will have a clearer control of what is it and which environment it belongs. So let's add some tag to our resource group in ```main.tf```:
+```json
+  tags = {
+    "env" = "staging"
+    "project" = "myapp"
+  }
+```
+
+The complete block should be like:
+```json
+resource "azurerm_resource_group" "default" {
+  name     = "staging-resources"
+  location = "eastus"
+  tags = {
+    "env" = "staging"
+    "project" = "myapp"
+  }
+}
+```
+
+And run:
+```bash
+terraform apply
+```
+
+## Configure tfstate to a backend provider storage
+For safety reasons, we don't want to store the state of our services on our computer, so we will configure a Azure Backend Service to store the terraform state, current the ```terraform.tfstate``` file.
+
+Take a look on [https://www.terraform.io/language/settings/backends/azurerm](https://www.terraform.io/language/settings/backends/azurerm)
 
