@@ -112,12 +112,23 @@ In your ```main.tf``` file, add a code block:
 ```bash
 # Create a resource group
 resource "azurerm_resource_group" "default" {
-  name     = "example-resources"
+  name     = "staging-resources"
   location = "eastus"
 }
 ```
 
-Let`s run terraform to see our plan:
+Let's run terraform to see our plan (it could take some time):
 ```bash
 terraform plan
 ```
+
+And now let's apply and it will be provisioned on Azure. You have to confirm the action with ```yes```:
+```bash
+terraform apply
+```
+
+An important thing is to destroy your resources after you have done with your objectives, avoiding additional costs. Run the command and remember to type ```yes``` and confirm:
+```bash
+terraform destroy
+```
+
