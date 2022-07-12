@@ -63,7 +63,6 @@ To get providers documentations, use the [Terraform Registry](https://registry.t
 - Open the ```main.tf``` file with your IDE
 
 - Like said on the guide above, insert the content below in the ```main.tf``` file:
-
 ```t
 terraform {
   required_providers {
@@ -98,4 +97,27 @@ sudo bash -c 'echo "$(dig management.azure.com | grep -E -o "([0-9]{1,3}[\.]){3}
 If you need to update the host IP address (usually if you have changed your region you will want it), run:
 ```bash
 sudo bash -c "sed -i '/management.azure.com/d' /etc/hosts" ; sudo bash -c 'echo "$(dig management.azure.com | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}$") management.azure.com" >> /etc/hosts'
+```
+
+## Define our first resource
+A resource group is a container that holds related resources for a solution.
+
+You decide how you want to allocate resources to resource groups based on what makes the most sense for you.
+
+A resource group could be all instances needed to run your application, like APP, DB and some Cache, or your can create a DB Cluster as one group and create another to your APP.
+
+Generally, add resources that share the same lifecycle to the same resource group so you can easily deploy, update, and delete them as a group.
+
+In your ```main.tf``` file, add a code block:
+```bash
+# Create a resource group
+resource "azurerm_resource_group" "default" {
+  name     = "example-resources"
+  location = "eastus"
+}
+```
+
+Let`s run terraform to see our plan:
+```bash
+terraform plan
 ```
