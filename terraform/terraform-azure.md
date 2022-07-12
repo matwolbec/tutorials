@@ -58,7 +58,7 @@ az account list
 
 ## Initializing the Terraform file structure
 
-To get providers documentations, use the registry.terraform.io. You will find a lot of available providers there. In our case: [https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli)
+To get providers documentations, use the [Terraform Registry](https://registry.terraform.io). You will find a lot of available providers there. In our case: [https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli)
 
 - Open the ```main.tf``` file with your IDE
 
@@ -78,4 +78,24 @@ terraform {
 provider "azurerm" {
   features {}
 }
+```
+
+- Run the command to install the provider package and set the workdir:
+```bash
+terraform init
+```
+
+## Workaround for WSL2
+If you are using the WSL2 (linux on windows) like me, there is a DNS issue where the Terraform tries to resolute the ```management.azure.com``` without success.
+
+For further info: [GitHub Microsoft WSL issues 8022](https://github.com/microsoft/WSL/issues/8022)  
+
+I found this workaround, resolving the record with ```dig``` and adding to your ```/etc/hosts``` file. Another alternative is to set custom DNS server on your ```/etc/resolv.conf```.
+```bash
+sudo bash -c 'echo "$(dig management.azure.com | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}$") management.azure.com" >> /etc/hosts'
+```
+
+If you need to update the host IP address (usually if you have changed your region you will want it), run:
+```bash
+sudo bash -c "sed -i '/management.azure.com/d' /etc/hosts" ; sudo bash -c 'echo "$(dig management.azure.com | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}$") management.azure.com" >> /etc/hosts'
 ```
