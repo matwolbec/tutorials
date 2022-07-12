@@ -81,6 +81,7 @@ provider "azurerm" {
 ```
 
 - Run the command to install the provider package and set the workdir:
+
 ```bash
 terraform init
 ```
@@ -110,7 +111,7 @@ A resource group could be all instances needed to run your application, like APP
 Generally, add resources that share the same lifecycle to the same resource group so you can easily deploy, update, and delete them as a group.
 
 In your ```main.tf``` file, add a code block:
-```json
+```s
 # Create a resource group
 resource "azurerm_resource_group" "default" {
   name     = "staging-resources"
@@ -139,7 +140,7 @@ terraform destroy
 
 ## Adding resources
 Tagging your resource is a good advice, you will have a clearer control of what is it and which environment it belongs. So let's add some tag to our resource group in ```main.tf```:
-```json
+```s
   tags = {
     "env" = "staging"
     "project" = "myapp"
@@ -147,7 +148,7 @@ Tagging your resource is a good advice, you will have a clearer control of what 
 ```
 
 The complete block should be like:
-```json
+```s
 resource "azurerm_resource_group" "default" {
   name     = "staging-resources"
   location = "eastus"
