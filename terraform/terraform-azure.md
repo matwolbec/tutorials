@@ -63,6 +63,7 @@ To get providers documentations, use the [Terraform Registry](https://registry.t
 - Open the ```main.tf``` file with your IDE
 
 - Like said on the guide above, insert the content below in the ```main.tf``` file:
+
 ```t
 terraform {
   required_providers {
