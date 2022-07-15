@@ -167,6 +167,8 @@ terraform apply
 ## Configure tfstate to a backend provider storage
 For safety reasons, we don't want to store the state of our services on our computer, so we will configure a Azure Backend Service to store the terraform state, current the ```terraform.tfstate``` file.
 
+For more info, visit [https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage?tabs=terraform](https://docs.microsoft.com/en-us/azure/developer/terraform/store-state-in-azure-storage?tabs=terraform)
+
 Creating a terraform file to create an storage account
 ```bash
 cd ../storage
