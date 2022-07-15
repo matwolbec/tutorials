@@ -270,3 +270,34 @@ terraform init
 terraform plan
 terraform apply
 ```
+
+## Virtual Network
+
+Create a virtual network for our nodes
+
+[https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network)
+
+Create a new ```resource``` section on your ```staging/main.tf``` file:
+```s
+resource "azurerm_virtual_network" "default" {
+  name                = "staging-network"
+  location            = azurerm_resource_group.default.location
+  resource_group_name = azurerm_resource_group.default.name
+  address_space       = ["10.0.0.0/16"]
+
+  subnet {
+    name           = "internal"
+    address_prefix = "10.0.1.0/24"
+  }
+
+  tags = {
+    environment = "staging"
+  }
+}
+```
+
+And run terraform:
+```bash
+terraform plan
+terraform apply
+```
