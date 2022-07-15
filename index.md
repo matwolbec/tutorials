@@ -1,4 +1,7 @@
 # Welcome to @matwolbec tutorials
+<html>
+{{ site.data.navigation}}
+</html>
 
 Here you will find some tutorials about Linux and DevOps.
 
