@@ -167,8 +167,6 @@ terraform apply
 ## Configure tfstate to a backend provider storage
 For safety reasons, we don't want to store the state of our services on our computer, so we will configure a Azure Backend Service to store the terraform state, current the ```terraform.tfstate``` file.
 
-Take a look on [https://www.terraform.io/language/settings/backends/azurerm](https://www.terraform.io/language/settings/backends/azurerm)
-
 Creating a terraform file to create an storage account
 ```bash
 cd ../storage
@@ -222,6 +220,49 @@ resource "azurerm_storage_container" "tfstate" {
 ```
 
 And run:
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+You must store the id created. Get it:
+```bash
+terraform show | grep storage_account_name
+```
+
+## Adding backend
+
+Now you've created the storage, we will configure our backend. Go back to staging directory:
+```bash
+cd ../staging/
+```
+
+And let's work on the ```staging/main.tf```.
+
+Take a look on [https://www.terraform.io/language/settings/backends/azurerm](https://www.terraform.io/language/settings/backends/azurerm)
+
+The backend is declared on the terraform section like below:
+```s
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.0.0"
+    }
+  }
+  backend "azurerm" {
+    resource_group_name  = "tfstate"
+    storage_account_name = "tfstate<id>"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+  }
+}
+```
+
+Remember to substitute the ```<id>``` value for ```storage_account_name``` field.
+
+Save your file and run terraform:
 ```bash
 terraform init
 terraform plan
