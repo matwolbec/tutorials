@@ -35,7 +35,7 @@ cd howto-terraform
   
 Now you can create another dir to define different environments, like ```staging``` and ```production```:
 ```bash
-mkdir staging production
+mkdir staging production tfstatus-storage
 ```
   
 Create a ```main.tf``` file. We will use the ```staging``` directory first
@@ -169,3 +169,61 @@ For safety reasons, we don't want to store the state of our services on our comp
 
 Take a look on [https://www.terraform.io/language/settings/backends/azurerm](https://www.terraform.io/language/settings/backends/azurerm)
 
+Creating a terraform file to create an storage account
+```bash
+cd ../storage
+touch main.tf
+```
+
+Open the file and add the content:
+```s
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.0.0"
+    }
+  }
+}
+
+provider "azurerm" {
+  features {}
+}
+
+resource "random_string" "resource_code" {
+  length  = 5
+  special = false
+  upper   = false
+}
+
+resource "azurerm_resource_group" "tfstate" {
+  name     = "tfstate"
+  location = "East US"
+}
+
+resource "azurerm_storage_account" "tfstate" {
+  name                     = "tfstate${random_string.resource_code. result}"
+  resource_group_name      = azurerm_resource_group.tfstate.name
+  location                 = azurerm_resource_group.tfstate.location
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+  allow_nested_items_to_be_public = true
+
+  tags = {
+    environment = "staging"
+  }
+}
+
+resource "azurerm_storage_container" "tfstate" {
+  name                  = "tfstate"
+  storage_account_name  = azurerm_storage_account.tfstate.name
+  container_access_type = "blob"
+}
+```
+
+And run:
+```bash
+terraform init
+terraform plan
+terraform apply
+```
