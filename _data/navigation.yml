@@ -5,7 +5,7 @@
   url: /
 
 - title: Group of Things
-  url: /group/
+  url: /tutorials/
   sublinks:
     - title: Sub-item 1
       url: /group/si1
