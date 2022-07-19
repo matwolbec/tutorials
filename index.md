@@ -1,6 +1,4 @@
 # Welcome to @matwolbec tutorials
-{% include navigation.html %}
-{{ site.data.navigation}}
 
 Here you will find some tutorials about Linux and DevOps.
 
