@@ -273,7 +273,7 @@ terraform apply
 
 ## Virtual Network
 
-Create a virtual network for our nodes
+Create a virtual network for our services and subnets to isolate some resources.
 
 [https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network)
 
@@ -300,4 +300,82 @@ And run terraform:
 ```bash
 terraform plan
 terraform apply
+```
+
+## Using variables
+For a better maintanance, let's create a variable file and set our standard settings. The file must be named ```variables.tf```.
+```bash
+touch variables.tf
+```
+
+Open the file and add:
+```s
+variable "locat" {
+    default = "eastus"
+}
+
+variable "rg" {
+    default = "staging-resources"
+}
+
+variable "vnet" {
+    default = "staging-network"
+}
+```
+
+To use it on your ```main.tf```, just call: ```var.variable_name```
+
+Ex:
+```bash
+location = var.locat
+```
+
+So our ```main.tf``` file will be like this:
+```s
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.0.0"
+    }
+  }
+  backend "azurerm" {
+    resource_group_name  = "tfstate"
+    storage_account_name = "tfstatedye1v"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+  }
+
+}
+
+# Configure the Microsoft Azure Provider
+provider "azurerm" {
+  features {}
+}
+
+# Create a resource group
+resource "azurerm_resource_group" "default" {
+  name     = var.rg
+  location = var.locat
+  tags = {
+    "env"     = "staging"
+    "project" = "myapp"
+  }
+}
+
+resource "azurerm_virtual_network" "default" {
+  name                = var.vnet
+  location            = var.locat
+  resource_group_name = var.rg
+  address_space       = ["10.0.0.0/16"]
+
+  subnet {
+    name           = "internal"
+    address_prefix = "10.0.1.0/24"
+  }
+
+  tags = {
+    environment = "staging"
+  }
+}
 ```
