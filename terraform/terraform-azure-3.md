@@ -9,7 +9,7 @@ For more info, visit [https://docs.microsoft.com/en-us/azure/developer/terraform
 
 Creating a terraform file to create an storage account
 ```bash
-cd ../storage
+cd ../tfstatus-storage
 touch main.tf
 ```
 
@@ -109,36 +109,6 @@ terraform plan
 terraform apply
 ```
 
-## Virtual Network
-
-Create a virtual network for our services and subnets to isolate some resources.
-
-[https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_network)
-
-Create a new ```resource``` section on your ```staging/main.tf``` file:
-```s
-resource "azurerm_virtual_network" "default" {
-  name                = "staging-network"
-  location            = azurerm_resource_group.default.location
-  resource_group_name = azurerm_resource_group.default.name
-  address_space       = ["10.0.0.0/16"]
-
-  subnet {
-    name           = "internal"
-    address_prefix = "10.0.1.0/24"
-  }
-
-  tags = {
-    environment = "staging"
-  }
-}
-```
-
-And run terraform:
-```bash
-terraform plan
-terraform apply
-```
 
 ## Using variables
 For a better maintanance, let's create a variable file and set our standard settings. The file must be named ```variables.tf```.
@@ -156,8 +126,8 @@ variable "rg" {
     default = "staging-resources"
 }
 
-variable "vnet" {
-    default = "staging-network"
+variable env_tag {
+    default = "staging"
 }
 ```
 
@@ -168,6 +138,7 @@ Ex:
 location = var.locat
 ```
 
+Furthermore, we need to create another resource group to store our instances, network, etc.
 So our ```main.tf``` file will be like this:
 ```s
 terraform {
@@ -179,7 +150,7 @@ terraform {
   }
   backend "azurerm" {
     resource_group_name  = "tfstate"
-    storage_account_name = "tfstatedye1v"
+    storage_account_name = "tfstate<id>"
     container_name       = "tfstate"
     key                  = "terraform.tfstate"
   }
@@ -196,24 +167,12 @@ resource "azurerm_resource_group" "default" {
   name     = var.rg
   location = var.locat
   tags = {
-    "env"     = "staging"
+    "env"     = var.env_tag
     "project" = "myapp"
   }
 }
-
-resource "azurerm_virtual_network" "default" {
-  name                = var.vnet
-  location            = var.locat
-  resource_group_name = var.rg
-  address_space       = ["10.0.0.0/16"]
-
-  subnet {
-    name           = "internal"
-    address_prefix = "10.0.1.0/24"
-  }
-
-  tags = {
-    environment = "staging"
-  }
-}
 ```
+
+## Next steps
+
+Go to [page 4](terraform-azure-4.md) to create our network.
