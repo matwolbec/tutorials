@@ -153,7 +153,7 @@ The complete block should be like:
 ```s
 resource "azurerm_resource_group" "default" {
   name     = "staging-resources"
-  location = "eastus"
+  location = "australiaeast"
   tags = {
     "env" = "staging"
     "project" = "myapp"
@@ -313,7 +313,7 @@ touch variables.tf
 Open the file and add:
 ```s
 variable "locat" {
-    default = "eastus"
+    default = "australiaeast"
 }
 
 variable "rg" {
