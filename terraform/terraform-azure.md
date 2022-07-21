@@ -110,12 +110,14 @@ A resource group could be all instances needed to run your application, like APP
 
 Generally, add resources that share the same lifecycle to the same resource group so you can easily deploy, update, and delete them as a group.
 
+- PS: Microsoft Azure is limiting resources by location to free accounts, so we will use the ```australiaeast``` region where are available computing resources for testing purposes. 
+
 In your ```main.tf``` file, add a code block:
 ```s
 # Create a resource group
 resource "azurerm_resource_group" "default" {
   name     = "staging-resources"
-  location = "eastus"
+  location = "australiaeast"
 }
 ```
 
