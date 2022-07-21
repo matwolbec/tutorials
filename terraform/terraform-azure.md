@@ -56,4 +56,5 @@ Get the subscription list (we don't need it right now, but you can have more sub
 az account list
 ```
 
+## Next steps
 Go to [page 2](terraform-azure-2.md) to start using terraform
