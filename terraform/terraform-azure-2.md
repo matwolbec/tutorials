@@ -1,5 +1,7 @@
 # [@matwolbec tutorials](https://matwolbec.github.io/tutorials/)
 
+Back to [page 1](terraform-azure.md)
+
 ## Initializing the Terraform file structure
 
 To get providers documentations, use the [Terraform Registry](https://registry.terraform.io). You will find a lot of available providers there. In our case: [https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli)
