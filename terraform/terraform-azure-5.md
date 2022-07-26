@@ -1,6 +1,6 @@
 # [@matwolbec tutorials](https://matwolbec.github.io/tutorials/)
 
-Back to [page 2](terraform-azure-2.md)
+Back to [page 4](terraform-azure-4.md)
 
 ## Creating our VM
 
