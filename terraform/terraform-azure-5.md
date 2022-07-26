@@ -33,6 +33,10 @@ resource "azurerm_linux_virtual_machine" "default" {
     version   = "latest"
   }
 }
+
+output "azurerm_public_ip" {
+  value = azurerm_public_ip.default.ip_address
+}
 ```
 
 Add to ```variables.tf```
@@ -54,6 +58,20 @@ Run terraform
 terraform apply
 ```
 
+The output will show the public IP created. Now we can SSH into the VM:
+```bash
+ssh adminuser@<ip_output> -i ~/.ssh/id_azure_tf
+```
+
+And login as root
+```bash
+sudo su -
+```
+
+Don't forget to destroy it after your tests
+```bash
+terraform apply
+```
 
 
 ## Next steps
