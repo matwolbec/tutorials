@@ -20,23 +20,58 @@ AKS uses both system-assigned and user-assigned managed identity types, and thes
 
 ## The main file
 
-Go to the ```production``` directory and create a new ```main.tf``` file.
+Go to the ```production``` directory and create a new ```main.tf``` and ```variables.tf``` file.
 ```bash
 cd ../production
-touch main.tf
+touch main.tf variables.tf
 ```
 
-Open the file with your IDE and add
+
+
+Open the ```variables.tf``` file with your IDE and add:
 ```s
-resource "azurerm_resource_group" "example" {
-  name     = "example-resources"
-  location = "West Europe"
+
+```
+
+
+Open the ```main.tf``` file:
+```s
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=3.0.0"
+    }
+  }
+  backend "azurerm" {
+    resource_group_name  = "tfstate"
+    storage_account_name = "tfstate<id>"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+  }
+
 }
 
-resource "azurerm_kubernetes_cluster" "example" {
-  name                = "example-aks1"
-  location            = azurerm_resource_group.example.location
-  resource_group_name = azurerm_resource_group.example.name
+# Configure the Microsoft Azure Provider
+provider "azurerm" {
+  features {}
+}
+
+# Create a resource group
+resource "azurerm_resource_group" "default" {
+  name     = var.rg
+  location = var.locat
+  tags = {
+    "env"     = var.env_tag
+    "project" = "myapp"
+  }
+}
+
+
+resource "azurerm_kubernetes_cluster" "default" {
+  name                = "${var.locat}-${var.kc}"
+  location            = azurerm_resource_group.default.location
+  resource_group_name = azurerm_resource_group.default.name
   dns_prefix          = "exampleaks1"
 
   default_node_pool {
@@ -55,15 +90,22 @@ resource "azurerm_kubernetes_cluster" "example" {
 }
 
 output "client_certificate" {
-  value     = azurerm_kubernetes_cluster.example.kube_config.0.client_certificate
+  value     = azurerm_kubernetes_cluster.default.kube_config.0.client_certificate
   sensitive = true
 }
 
 output "kube_config" {
-  value = azurerm_kubernetes_cluster.example.kube_config_raw
+  value = azurerm_kubernetes_cluster.default.kube_config_raw
 
   sensitive = true
 }
+```
+
+Run
+```bash
+terraform init
+terraform plan
+terraform apply
 ```
 
 ## Next steps
