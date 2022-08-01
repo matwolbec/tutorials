@@ -1,6 +1,6 @@
 # [@matwolbec tutorials](https://matwolbec.github.io/tutorials/)
 
-Back to [page 4](terraform-azure-4.md)
+Back to [page 5](terraform-azure-5.md)
 
 ## Before the cluster, know about identity
 An Azure Kubernetes Service (AKS) cluster requires an identity to access Azure resources like load balancers and managed disks.
@@ -18,12 +18,13 @@ Managed identities are essentially a wrapper around service principals, and make
 Managed identities use certificate-based authentication, and each managed identities credential has an expiration of 90 days and it's rolled after 45 days.
 AKS uses both system-assigned and user-assigned managed identity types, and these identities are immutable.
 
-## The main file
+
+## The terraform files
 
 Go to the ```production``` directory and create a new ```main.tf``` and ```variables.tf``` file.
 ```bash
 cd ../production
-touch main.tf variables.tf
+touch main.tf variables.tf outputs.tf
 ```
 
 
@@ -101,6 +102,15 @@ output "kube_config" {
 }
 ```
 
+And the ```outputs.tf``` file:
+```s
+resource "local_file" "default" {
+  depends_on   = [azurerm_kubernetes_cluster.default]
+  filename     = "kubeconfig"
+  content      = azurerm_kubernetes_cluster.default.kube_config_raw
+}
+```
+
 Run
 ```bash
 terraform init
@@ -108,6 +118,16 @@ terraform plan
 terraform apply
 ```
 
+## Running kubectl
+Now you already can use ```kubectl``` to manage your kubernetes.
+See [https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/](https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/) to install it if you don't have it yet.
+```bash
+kubectl get nodes --kubeconfig kubeconfig
+```
+
+
 ## Next steps
 
 Go to [page 7](terraform-azure-7.md) to deploy our application.
+
+
