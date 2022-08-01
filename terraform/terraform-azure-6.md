@@ -1,0 +1,71 @@
+# [@matwolbec tutorials](https://matwolbec.github.io/tutorials/)
+
+Back to [page 4](terraform-azure-4.md)
+
+## Before the cluster, know about identity
+An Azure Kubernetes Service (AKS) cluster requires an identity to access Azure resources like load balancers and managed disks.
+This identity can be either a managed identity or a service principal.
+
+By default (which we are using in next steps), when you create an AKS cluster a system-assigned managed identity automatically created.
+The identity is managed by the Azure platform and doesn't require you to provision or rotate any secrets. 
+
+To use a service principal, you have to create one, as AKS does not create one automatically.
+Clusters using a service principal eventually expire and the service principal must be renewed to keep the cluster working.
+Managing service principals adds complexity, thus it's easier to use managed identities instead.
+The same permission requirements apply for both service principals and managed identities.
+
+Managed identities are essentially a wrapper around service principals, and make their management simpler.
+Managed identities use certificate-based authentication, and each managed identities credential has an expiration of 90 days and it's rolled after 45 days.
+AKS uses both system-assigned and user-assigned managed identity types, and these identities are immutable.
+
+## The main file
+
+Go to the ```production``` directory and create a new ```main.tf``` file.
+```bash
+cd ../production
+touch main.tf
+```
+
+Open the file with your IDE and add
+```s
+resource "azurerm_resource_group" "example" {
+  name     = "example-resources"
+  location = "West Europe"
+}
+
+resource "azurerm_kubernetes_cluster" "example" {
+  name                = "example-aks1"
+  location            = azurerm_resource_group.example.location
+  resource_group_name = azurerm_resource_group.example.name
+  dns_prefix          = "exampleaks1"
+
+  default_node_pool {
+    name       = "default"
+    node_count = 1
+    vm_size    = "Standard_D2_v2"
+  }
+
+  identity {
+    type = "SystemAssigned"
+  }
+
+  tags = {
+    Environment = "Production"
+  }
+}
+
+output "client_certificate" {
+  value     = azurerm_kubernetes_cluster.example.kube_config.0.client_certificate
+  sensitive = true
+}
+
+output "kube_config" {
+  value = azurerm_kubernetes_cluster.example.kube_config_raw
+
+  sensitive = true
+}
+```
+
+## Next steps
+
+Go to [page 7](terraform-azure-7.md) to deploy our application.
