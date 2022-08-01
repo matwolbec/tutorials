@@ -142,6 +142,11 @@ See [https://kubernetes.io/docs/tasks/tools/install-kubectl-linux/](https://kube
 kubectl get nodes --kubeconfig kubeconfig
 ```
 
+If you don't want to use every time the ```--kubeconfig``` parameter, you can run:
+```bash
+cp kubeconfig ~/.kube/config
+```
+
 
 ## Next steps
 
