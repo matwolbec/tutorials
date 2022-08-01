@@ -70,7 +70,7 @@ sudo su -
 
 Don't forget to destroy it after your tests
 ```bash
-terraform apply
+terraform destroy
 ```
 
 
