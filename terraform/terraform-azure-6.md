@@ -31,7 +31,24 @@ touch main.tf variables.tf outputs.tf
 
 Open the ```variables.tf``` file with your IDE and add:
 ```s
+// Environment
+variable "locat" {
+    default = "australiaeast"
+}
 
+variable "rg" {
+    default = "production"
+}
+
+variable env_tag {
+    default = "production"
+}
+
+
+//Computing
+variable "kc" {
+    default = "aks_cluster"
+}
 ```
 
 
