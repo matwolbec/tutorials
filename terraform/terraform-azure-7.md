@@ -51,6 +51,38 @@ And access: [http://localhost:8080/](http://localhost:8080/)
 
 It should show the message: It works!
 
+## Adding a public access with Load Balancer
+
+Add to your ```deployment.yaml```
+```yaml
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-kubernetes
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 80
+      targetPort: 80
+  selector:
+    name: hello-kubernetes
+    
+```
+
+And run:
+```bash
+kubectl apply -f deployment.yaml
+```
+
+You can check your services with:
+```bash
+kubectl get svc
+```
+
+Your public IP will be shown. Access it and Voilà!
+
 ## Next steps
 
 Go to [deploy with jenkins](jenkins.md).
