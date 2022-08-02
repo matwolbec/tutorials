@@ -83,8 +83,19 @@ kubectl get svc
 
 Your public IP will be shown. Access it and Voilà!
 
+## Destroying
+Don't forget to destroy your resources to avoid charges.
+
+Run:
+```bash
+kubectl delete -f deployment.yaml
+terraform destroy
+```
+
+
+
 ## Next steps
 
-Go to [deploy with jenkins](jenkins.md).
+Go to [ingress controller](terraform-azure-8.md).
 
 
