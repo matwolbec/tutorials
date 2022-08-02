@@ -7,6 +7,16 @@ Terraform is an open-source infrastructure as code software tool that enables yo
 
 For further info, check [https://www.terraform.io/](https://www.terraform.io/)
 
+## Pages
+- [[Page 1] Requirements - Terraform/Azure](/)
+- [[Page 2] Initializing Terraform](terraform-azure-2.html)
+- [[Page 3] tfstate and variables](terraform-azure-3.html)
+- [[Page 4] Creating a network](terraform-azure-4.html)
+- [[Page 5] Creating a instance(VM)](terraform-azure-5.html)
+- [[Page 6] Kubernetes](terraform-azure-6.html)
+- [[Page 7] Deploying and application](terraform-azure-7.html)
+- [[Page 8] Ingress Controller](terraform-azure-8.html)
+
 ## Install requirements
 - Terraform: Choose your OS and follow the guide [https://www.terraform.io/downloads](https://www.terraform.io/downloads)
 - Azure CLI: Same as above [https://docs.microsoft.com/en-us/cli/azure/install-azure-cli](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
