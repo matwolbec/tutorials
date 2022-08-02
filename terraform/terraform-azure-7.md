@@ -1,10 +1,17 @@
 # [@matwolbec tutorials](https://matwolbec.github.io/tutorials/)
 
-Back to [page 5](terraform-azure-5.md)
+Back to [page 6](terraform-azure-6.md)
 
 
-##
+## Creating a deployment file
 
+The kubectl works with YAML definition. Create a file ```deployment.yaml```:
+```bash
+touch deployment.yaml
+```
+
+Open it and add:
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -20,9 +27,29 @@ spec:
     spec:
       containers:
         - name: app
-          image: paulbouwer/hello-kubernetes:1.8
+          image: httpd:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 80
+```
+
+Save and run:
+```bash
+kubectl apply -f deployment.yaml
+```
+
+You can check yours pods:
+```bash
+kubectl get pods
+```
+
+We didn'nt assign a public access yet, but you can run a proxy to connect and test. Get the name of the pod with the ```kubectl get pods``` and:
+```bash
+kubectl port-forward <name-of-your-pod> 8080:80
+```
+
+And access: [http://localhost:8080/](http://localhost:8080/)
+
+It should show the message: It works!
 
 ## Next steps
 
