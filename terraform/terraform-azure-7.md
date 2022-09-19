@@ -96,6 +96,6 @@ terraform destroy
 
 ## Next steps
 
-Go to [ingress controller](terraform-azure-8.md).
+Go to [custom application on docker](terraform-azure-8.md).
 
 
