@@ -84,6 +84,15 @@ You can watch the magic happening with:
 kubectl get pods
 ```
 
+## Destroying
+Don't forget to destroy your resources to avoid charges.
+
+Run:
+```bash
+kubectl delete -f deployment.yaml
+terraform destroy
+```
+
 ## Next steps
 
 Go to [Ingress Controller](terraform-azure-9.md).
