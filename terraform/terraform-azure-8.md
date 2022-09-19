@@ -19,10 +19,8 @@ touch Dockerfile
 
 Open the file and add:
 ```docker
-FROM php:7.4-cli
-COPY . /usr/src/myapp
-WORKDIR /usr/src/myapp
-CMD [ "php", "./index.php" ]
+FROM php:7.4-apache
+COPY . /var/www/html/
 ```
 
 Create a ```index.php``` file. We want to PHP print the hostname, so we will know what host we are getting to:
@@ -47,6 +45,11 @@ docker build -t <your-dockerhub-name>/php-gethostname:v1 -f Dockerfile .
 Before we can push it, let's create the repository on DockerHub: [https://hub.docker.com/repository/create](https://hub.docker.com/repository/create).
 Name it ```php-gethostname``` and leave the visibility as ```Public```.
 
+Login on your docker-cli:
+```bash
+docker login
+```
+
 We can now push it to dockerhub:
 ```bash
 docker push matwolbec/php-gethostname:v1
@@ -56,6 +59,29 @@ We should tag the version as the latest available:
 ```bash
 docker tag matwolbec/php-gethostname:v1  matwolbec/php-gethostname:latest
 docker push matwolbec/php-gethostname:latest
+cd ..
+```
+
+## Deploying our image to our Kubeernetes cluster
+Open the ```deployment.yaml``` and change:
+```
+          image: httpd:latest
+```
+
+To:
+
+```
+          image: matwolbec/php-gethostname:latest
+```
+
+And apply:
+```bash
+kubectl apply -f deployment.yaml
+```
+
+You can watch the magic happening with:
+```bash
+kubectl get pods
 ```
 
 ## Next steps
