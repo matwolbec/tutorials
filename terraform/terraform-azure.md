@@ -15,7 +15,8 @@ For further info, check [https://www.terraform.io/](https://www.terraform.io/)
 - [[Page 5] Creating a instance(VM)](terraform-azure-5.html)
 - [[Page 6] Kubernetes](terraform-azure-6.html)
 - [[Page 7] Deploying and application](terraform-azure-7.html)
-- [[Page 8] Ingress Controller](terraform-azure-8.html)
+- [[Page 8] Custom application on Docker](terraform-azure-8.html)
+- [[Page 9] Ingress Controller](terraform-azure-9.html)
 
 ## Install requirements
 - Terraform: Choose your OS and follow the guide [https://www.terraform.io/downloads](https://www.terraform.io/downloads)
