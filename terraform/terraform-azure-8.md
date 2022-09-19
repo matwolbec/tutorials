@@ -44,6 +44,20 @@ Now you should have your dockerhub account. Let's build. Don't forget to substit
 docker build -t <your-dockerhub-name>/php-gethostname:v1 -f Dockerfile .
 ```
 
+Before we can push it, let's create the repository on DockerHub: [https://hub.docker.com/repository/create](https://hub.docker.com/repository/create).
+Name it ```php-gethostname``` and leave the visibility as ```Public```.
+
+We can now push it to dockerhub:
+```bash
+docker push matwolbec/php-gethostname:v1
+```
+
+We should tag the version as the latest available:
+```bash
+docker tag matwolbec/php-gethostname:v1  matwolbec/php-gethostname:latest
+docker push matwolbec/php-gethostname:latest
+```
+
 ## Next steps
 
 Go to [Ingress Controller](terraform-azure-9.md).
